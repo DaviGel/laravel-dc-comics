@@ -31,7 +31,7 @@ class PageController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        
+
         $comic = new ComicsModel();
         $comic->title = $data['title'];
         $comic->description = $data['description'];
@@ -54,7 +54,7 @@ class PageController extends Controller
      */
     public function show(ComicsModel $comic)
     {
-       return view('comics.show', compact('comic'));
+        return view('comics.show', compact('comic'));
     }
 
     /**
