@@ -12,7 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dc_comics', function (Blueprint $table) {
-            $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->string('thumb')->nullable();
+            $table->string('price', 10);
+            $table->string('series', 50);
+            $table->string('type', 30);
+            $table->text('artists');
+            $table->text('writers');
             $table->timestamps();
         });
     }

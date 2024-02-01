@@ -13,15 +13,16 @@ class PageController extends Controller
      */
     public function index()
     {
-        //
+        $comics = ComicsModel::all();
+        return view('comics.list', compact('comics'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(ComicsModel $comics)
     {
-        //
+        return view('comics.create');
     }
 
     /**
@@ -29,15 +30,31 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        
+        $comic = new ComicsModel();
+        $comic->title = $data['title'];
+        $comic->description = $data['description'];
+        $comic->thumb = $data['thumb'];
+        $comic->price = $data['price'];
+        $comic->series = $data['series'];
+        $comic->sale_date = $data['sale_date'];
+        $comic->type = $data['type'];
+        $jsonartists = json_encode($data['artists']);
+        $comic->artists = $jsonartists;
+        $jsonwriters = json_encode($data['writers']);
+        $comic->writers = $jsonwriters;
+        $comic->save();
+
+        return redirect()->route('comics.show', $comic->id);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ComicsModel $comic)
     {
-        //
+       return view('comics.show', compact('comic'));
     }
 
     /**
