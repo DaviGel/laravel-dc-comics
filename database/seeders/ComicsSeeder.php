@@ -24,8 +24,10 @@ class ComicsSeeder extends Seeder
             $comics->series = $data['series'];
             $comics->sale_date = $data['sale_date'];
             $comics->type = $data['type'];
-            $comics->artists = $data['artists'];
-            $comics->writers = $data['writers'];
+            $jsonartists = json_encode($data['artists']);
+            $comics->artists = $jsonartists;
+            $jsonwriters = json_encode($data['writers']);
+            $comics->writers = $jsonwriters;
             $comics->save();
         }
     }
