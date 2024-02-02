@@ -12,9 +12,11 @@
     </head>
 
     <body>
-        @yield('list')
-        @yield('create')
-        @yield('show')
+        <div class="container my-4">
+            @yield('list')
+            @yield('create')
+            @yield('show')
+        </div>
     </body>
 
 </html>
