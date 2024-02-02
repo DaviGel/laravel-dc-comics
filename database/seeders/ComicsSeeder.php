@@ -15,7 +15,7 @@ class ComicsSeeder extends Seeder
     {
         $datas = config('comicsdb');
 
-        foreach($datas as $data) {
+        foreach ($datas as $data) {
             $comics = new ComicsModel();
             $comics->title = $data['title'];
             $comics->description = $data['description'];
@@ -24,10 +24,8 @@ class ComicsSeeder extends Seeder
             $comics->series = $data['series'];
             $comics->sale_date = $data['sale_date'];
             $comics->type = $data['type'];
-            $jsonartists = json_encode($data['artists']);
-            $comics->artists = $jsonartists;
-            $jsonwriters = json_encode($data['writers']);
-            $comics->writers = $jsonwriters;
+            $comics->artists = $data['artists'];
+            $comics->writers = $data['writers'];
             $comics->save();
         }
     }

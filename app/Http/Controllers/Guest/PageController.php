@@ -31,21 +31,22 @@ class PageController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
         $comic = new ComicsModel();
-        $comic->title = $data['title'];
-        $comic->description = $data['description'];
-        $comic->thumb = $data['thumb'];
-        $comic->price = $data['price'];
-        $comic->series = $data['series'];
-        $comic->sale_date = $data['sale_date'];
-        $comic->type = $data['type'];
-        $jsonartists = json_encode($data['artists']);
-        $comic->artists = $jsonartists;
-        $jsonwriters = json_encode($data['writers']);
-        $comic->writers = $jsonwriters;
-        $comic->save();
 
+        // Metodo per popolare i campi a mano
+        // $comic->title = $data['title'];
+        // $comic->description = $data['description'];
+        // $comic->thumb = $data['thumb'];
+        // $comic->price = $data['price'];
+        // $comic->series = $data['series'];
+        // $comic->sale_date = $data['sale_date'];
+        // $comic->type = $data['type'];
+        // $comic->artists = $data['artists'];
+        // $comic->writers = $data['writers'];
+
+        // Metodo alternativo per popolare tutti i campi
+        $comic->fill($data);
+        $comic->save();
         return redirect()->route('comics.show', $comic->id);
     }
 
@@ -62,7 +63,8 @@ class PageController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $comic = ComicsModel::findOrFail($id);
+        return view('comics.edit', compact('comic'));
     }
 
     /**
@@ -70,7 +72,10 @@ class PageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+        $comic = ComicsModel::findOrFail($id);
+        $comic->update($data);
+        return redirect()->route('comics.index', $comic->id);
     }
 
     /**
@@ -78,6 +83,8 @@ class PageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comic = ComicsModel::findOrFail($id);
+        $comic->delete();
+        return redirect()->route('comics.index');
     }
 }

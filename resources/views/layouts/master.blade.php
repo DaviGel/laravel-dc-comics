@@ -16,6 +16,7 @@
             @yield('list')
             @yield('create')
             @yield('show')
+            @yield('edit')
         </div>
     </body>
 
