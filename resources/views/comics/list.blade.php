@@ -33,7 +33,7 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    Sei sicuro di voler cancellare il fumetto {{ $comic->title }}?
+                                    Sei sicuro di voler cancellare il fumetto: {{ $comic->title }}?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
