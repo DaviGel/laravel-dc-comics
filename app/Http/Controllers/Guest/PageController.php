@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ComicRequest;
+use App\Http\Requests\StoreComicRequest;
 use App\Models\ComicsModel;
 use Illuminate\Http\Request;
 
@@ -28,9 +30,9 @@ class PageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ComicRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $comic = new ComicsModel();
 
         // Metodo per popolare i campi a mano
@@ -70,9 +72,9 @@ class PageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ComicRequest $request, string $id)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $comic = ComicsModel::findOrFail($id);
         $comic->update($data);
         return redirect()->route('comics.index', $comic->id);
